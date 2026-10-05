@@ -10,6 +10,8 @@ class VirtualLidar(Node):
     def __init__(self):
         super().__init__('virtual_lidar')
 
+        self.declare_parameter('obstacle_distance', 2.0)
+
         self.publisher = self.create_publisher(
             LaserScan,
             '/scan',
@@ -24,6 +26,10 @@ class VirtualLidar(Node):
         self.get_logger().info('Virtual LIDAR elindult.')
 
     def publish_scan(self):
+        obstacle_distance = self.get_parameter(
+            'obstacle_distance'
+        ).value
+
         scan = LaserScan()
 
         scan.header.stamp = self.get_clock().now().to_msg()
@@ -40,11 +46,10 @@ class VirtualLidar(Node):
 
         scan.ranges = [5.0] * number_of_rays
 
-        # Virtuális akadály 2 méterre, a robot előtt.
         center_index = 180
 
         for i in range(center_index - 10, center_index + 11):
-            scan.ranges[i] = 2.0
+            scan.ranges[i] = obstacle_distance
 
         self.publisher.publish(scan)
 
