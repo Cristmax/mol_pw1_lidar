@@ -26,6 +26,7 @@ setup(
 	entry_points={
    		'console_scripts': [
        		'virtual_lidar = virtual_obstacle_detector.virtual_lidar:main',
-    		],
+    		'obstacle_detector = virtual_obstacle_detector.obstacle_detector:main',
+		],
 	},
 )
