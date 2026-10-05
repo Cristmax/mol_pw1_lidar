@@ -22,16 +22,10 @@ A detektor három állapotot különböztet meg:
 ## Felépítés
 
 
-virtual_lidar
-      |
-      | sensor_msgs/LaserScan
-      v
-    /scan
-      |
-      v
-obstacle_detector
-      |
-      v
+virtual_lidar ->
+sensor_msgs/LaserScan ->
+/scan ->
+obstacle_detector ->
 SZABAD / FIGYELEM / AKADÁLY
 
 
